@@ -73,7 +73,9 @@ class jsonMacro(isStrict: Boolean) {
         case _ => {
           // use Spray's macro
           val applyMethod = q"${className.toTermName}.apply"
-          q"implicit val jsonAnnotationFormat: JsonFormat[$className] = jsonFormat1($applyMethod)"
+          val jsonFormatMethodName = TermName(s"jsonFormat$fieldsLength")
+          val jsonFormatMethod = q"$jsonFormatMethodName($applyMethod)"
+          q"implicit val jsonAnnotationFormat: JsonFormat[$className] = $jsonFormatMethod"
         }
       }
     }

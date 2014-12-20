@@ -8,7 +8,7 @@ import DefaultJsonProtocol._
 //@json case class Person(name: String, age: Int)
 
 @jsonstrict case class City2(name: String)
-//@jsonstrict case class Person2(name: String, age: Int)
+@jsonstrict case class Person2(name: String, age: Int)
 
 class JsonFormatAnnotationTest extends Specification {
 
@@ -44,15 +44,15 @@ class JsonFormatAnnotationTest extends Specification {
       Option(json.convertTo[City2]) must beSome(city)
     }
 
-//    "create correct formatter for case class with >= 2 fields" in {
-//
-//      val person = Person2("Victor Hugo", 46)
-//      val json = Json.toJson(person)
-//      json === Json.obj(
-//        "name" -> "Victor Hugo",
-//        "age" -> 46
-//      )
-//      Json.fromJson[Person2](json).asOpt must beSome(person)
-//    }
+    "create correct formatter for case class with >= 2 fields" in {
+
+      val person = Person2("Victor Hugo", 46)
+      val json = person.toJson
+      json === JsObject(
+        "name" -> JsString("Victor Hugo"),
+        "age" -> JsNumber(46)
+      )
+      Option(json.convertTo[Person2]) must beSome(person)
+    }
   }
 }
