@@ -55,7 +55,8 @@ class jsonMacro(isStrict: Boolean) {
     }
 
     def jsonFormatter(className: TypeName, fields: List[ValDef]) = {
-      fields.length match {
+      val fieldsLength = fields.length
+      fieldsLength match {
         case 0 => c.abort(c.enclosingPosition, "Cannot create json formatter for case class with no fields")
         case 1 if !isStrict => {
           // use the serializer for the field
@@ -70,8 +71,9 @@ class jsonMacro(isStrict: Boolean) {
           """
         }
         case _ => {
-          // use Play's macro
-          q"implicit val jsonAnnotationFormat = play.api.libs.json.Json.format[$className]"
+          // use Spray's macro
+          val applyMethod = q"${className.toTermName}.apply"
+          q"implicit val jsonAnnotationFormat: JsonFormat[$className] = jsonFormat1($applyMethod)"
         }
       }
     }

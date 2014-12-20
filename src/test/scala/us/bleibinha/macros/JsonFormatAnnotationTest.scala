@@ -41,7 +41,7 @@ class JsonFormatAnnotationTest extends Specification {
       val city = City2("San Francisco")
       val json = city.toJson
       json === JsObject("name" -> JsString("San Francisco"))
-      json.convertTo[City2] beSome(city)
+      Option(json.convertTo[City2]) must beSome(city)
     }
 
 //    "create correct formatter for case class with >= 2 fields" in {
