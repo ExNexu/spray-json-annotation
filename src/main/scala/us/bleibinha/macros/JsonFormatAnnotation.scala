@@ -61,12 +61,12 @@ class jsonMacro(isStrict: Boolean) {
         case 1 if !isStrict => {
           // use the serializer for the field
           q"""
-            implicit val jsonAnnotationFormat = {
-              import play.api.libs.json._
-              Format(
-                __.read[${fields.head.tpt}].map(s => ${className.toTermName}(s)),
-                new Writes[$className] { def writes(o: $className) = Json.toJson(o.${fields.head.name}) }
-              )
+            implicit val jsonAnnotationFormat = new RootJsonFormat[$className] {
+              def write(obj: $className) = obj.${fields.head.name}.toJson
+              def read(value: JsValue) = {
+                val scalaValue = value.convertTo[${fields.head.tpt}]
+                ${className.toTermName}(scalaValue)
+              }
             }
           """
         }
