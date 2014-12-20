@@ -22,6 +22,7 @@ libraryDependencies ++= (
 
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-json" % "2.3.1" % Test,
+  "io.spray" %% "spray-json" % "1.3.1" % Test,
   "org.specs2" %% "specs2" % "2.3.13" % Test
 )
 
