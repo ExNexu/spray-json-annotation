@@ -1,8 +1,8 @@
-organization := "com.kifi"
+organization := "us.bleibinha"
 
-name := "json-annotation"
+name := "spray-json-annotation"
 
-version := "0.2"
+version := "0.1"
 
 scalaVersion := "2.11.1"
 
@@ -32,38 +32,3 @@ unmanagedSourceDirectories in Compile <+= (sourceDirectory in Compile, scalaBina
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
 
 scalacOptions in ThisBuild ++= Seq("-unchecked", "-deprecation")
-
-publishMavenStyle := true
-
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
-
-publishArtifact in Test := false
-
-pomIncludeRepository := { _ => false }
-
-pomExtra := (
-  <url>https://github.com/kifi/json-annotation</url>
-  <licenses>
-    <license>
-      <name>MIT</name>
-      <url>http://opensource.org/licenses/MIT</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <scm>
-    <url>git@github.com:kifi/json-annotation.git</url>
-    <connection>scm:git:git@github.com:kifi/json-annotation.git</connection>
-  </scm>
-  <developers>
-    <developer>
-      <id>martinraison</id>
-      <name>Martin Raison</name>
-      <url>https://github.com/martinraison</url>
-    </developer>
-  </developers>)

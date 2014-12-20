@@ -1,4 +1,4 @@
-package com.kifi.macros
+package us.bleibinha.macros
 
 import org.specs2.mutable.Specification
 import play.api.libs.json._
