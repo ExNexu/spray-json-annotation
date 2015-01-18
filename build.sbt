@@ -2,11 +2,11 @@ organization := "us.bleibinha"
 
 name := "spray-json-annotation"
 
-version := "0.1"
+version := "0.2"
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.11.5"
 
-crossScalaVersions := Seq("2.10.2", "2.10.3", "2.10.4", "2.11.0", "2.11.1")
+crossScalaVersions := Seq("2.10.4", "2.11.5")
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("releases"),
@@ -31,4 +31,46 @@ unmanagedSourceDirectories in Compile <+= (sourceDirectory in Compile, scalaBina
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
 
-scalacOptions in ThisBuild ++= Seq("-unchecked", "-deprecation")
+scalacOptions := Seq(
+  "-encoding", "utf8",
+  "-feature",
+  "-unchecked",
+  "-deprecation",
+  "-target:jvm-1.6",
+  "-language:_",
+  "-Ywarn-dead-code",
+  "-Xlog-reflective-calls"
+)
+
+// publishing:
+
+aetherPublishSettings
+
+credentials += Credentials(Path.userHome / ".ivy2" / ".us-bleibinha-snapshots-credentials")
+
+credentials += Credentials(Path.userHome / ".ivy2" / ".us-bleibinha-releases-credentials")
+
+publishMavenStyle := true
+
+publishArtifact in Test := false
+
+publishTo := {
+  val archiva = "http://bleibinha.us/archiva/repository/"
+  if (version.value.trim.endsWith("SNAPSHOT"))
+    Some("snapshots" at archiva + "snapshots")
+  else
+    Some("releases"  at archiva + "releases")
+}
+
+pomExtra :=
+  <scm>
+    <url>https://github.com/ExNexu/spray-json-annotation</url>
+    <connection>scm:git@github.com:ExNexu/spray-json-annotation.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>exnexu</id>
+      <name>Stefan Bleibinhaus</name>
+      <url>http://bleibinha.us</url>
+    </developer>
+  </developers>
