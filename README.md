@@ -1,8 +1,6 @@
 spray-json-annotation
 =====================
 
-[![Build Status](https://travis-ci.org/ExNexu/spray-json-annotation.svg?branch=master)](https://travis-ci.org/ExNexu/spray-json-annotation)
-
 **Scala macros for creating spray-json JsonFormat's for case classes.**
 
 Code base from [kifi/json-annotation](https://github.com/kifi/json-annotation) which provides json annotations for play-json. More information on their blog: http://eng.kifi.com/scala-macro-annotations-real-world-example/
