@@ -1,7 +1,7 @@
 spray-json-annotation
 =====================
 
-[![Build Status](https://travis-ci.org/ExNexu/spray-json-annotation.svg?branch=master)](https://travis-ci.org/ExNexu/spray-json-annotation)
+[![Build Status](https://travis-ci.org/ExNexu/spray-json-annotation.svg?branch=master)](https://travis-ci.org/ExNexu/spray-json-annotation) [![Coverage Status](https://coveralls.io/repos/ExNexu/spray-json-annotation/badge.svg?branch=master)](https://coveralls.io/r/ExNexu/spray-json-annotation?branch=master)
 
 **Scala macros for creating spray-json JsonFormat's for case classes.**
 
