@@ -1,6 +1,6 @@
-organization := "us.bleibinha"
-
 name := "spray-json-annotation"
+
+organization := "us.bleibinha"
 
 version := "0.2"
 
