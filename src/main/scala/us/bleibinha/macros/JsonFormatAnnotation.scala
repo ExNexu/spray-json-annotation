@@ -75,7 +75,7 @@ class jsonMacro(isStrict: Boolean) {
           val applyMethod = q"${className.toTermName}.apply"
           val jsonFormatMethodName = getTermNameFromString(s"jsonFormat$fieldsLength", c)
           val jsonFormatMethod = q"$jsonFormatMethodName($applyMethod)"
-          q"implicit val jsonAnnotationFormat: JsonFormat[$className] = $jsonFormatMethod"
+          q"implicit val jsonAnnotationFormat: RootJsonFormat[$className] = $jsonFormatMethod"
         }
       }
     }
