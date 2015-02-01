@@ -17,7 +17,7 @@ Add this to your `build.sbt`:
 resolvers += "bleibinha.us/archiva releases" at "http://bleibinha.us/archiva/repository/releases"
 
 libraryDependencies ++= Seq(
-  "us.bleibinha" %% "spray-json-annotation" % "0.3"
+  "us.bleibinha" %% "spray-json-annotation" % "0.4"
 )
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
@@ -28,7 +28,7 @@ Use it in code:
 ```scala
 import spray.json._
 import spray.json.DefaultJsonProtocol._
-import us.bleibinha.macros._
+import us.bleibinha.spray.json.macros._
 
 @jsonstrict
 case class User(name: String, password: String)

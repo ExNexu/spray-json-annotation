@@ -1,4 +1,4 @@
-package us.bleibinha.macros
+package us.bleibinha.spray.json.macros
 
 import scala.annotation.StaticAnnotation
 import scala.language.experimental.macros

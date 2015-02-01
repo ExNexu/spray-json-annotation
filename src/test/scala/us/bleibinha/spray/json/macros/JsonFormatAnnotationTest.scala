@@ -1,4 +1,4 @@
-package us.bleibinha.macros
+package us.bleibinha.spray.json.macros
 
 import org.specs2.mutable.Specification
 import spray.json._
