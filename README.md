@@ -7,7 +7,7 @@ spray-json-annotation
 
 ## Get started
 
-Add this to your `build.sbt`:
+Add this to your `build.sbt` (for Scala 2.10 & 2.11):
 
 ```scala
 resolvers += "bleibinha.us/archiva releases" at "http://bleibinha.us/archiva/repository/releases"
