@@ -13,10 +13,10 @@ Add this to your `build.sbt` (for Scala 2.10 & 2.11):
 resolvers += "bleibinha.us/archiva releases" at "http://bleibinha.us/archiva/repository/releases"
 
 libraryDependencies ++= Seq(
-  "us.bleibinha" %% "spray-json-annotation" % "0.4"
+  "us.bleibinha" %% "spray-json-annotation" % "0.5"
 )
 
-addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
+addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full)
 ```
 
 Use it in code:
@@ -42,6 +42,14 @@ object User {
 ```
 
 `@json` can be used if the case class has only one field and you don't want to generate a full-blown json object. For more usage examples see the test implementation: [JsonFormatAnnotationTest.scala](https://github.com/ExNexu/spray-json-annotation/blob/master/src/test/scala/us/bleibinha/macros/JsonFormatAnnotationTest.scala)
+
+## Version history
+
+### 0.5
+* Update dependency and plugin versions
+
+### 0.4
+* First stable release
 
 ## Background
 
