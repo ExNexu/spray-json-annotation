@@ -1,8 +1,10 @@
 package us.bleibinha.spray.json.macros
 
-import scala.reflect.macros._
-import scala.language.experimental.macros
 import scala.annotation.StaticAnnotation
+import scala.language.experimental.macros
+import scala.reflect.macros._
+import scala.util.Failure
+import scala.util.Success
 
 import CrossVersionDefs._
 
@@ -46,19 +48,26 @@ class jsonMacro(isStrict: Boolean) {
     import c.universe._
 
     def extractClassNameAndFields(classDecl: ClassDef) = {
-      try {
+      val classNameAndFieldsTry = util.Try {
         val q"case class $className(..$fields) extends ..$bases { ..$body }" = classDecl
         (className, fields)
-      } catch {
-        case _: MatchError => c.abort(c.enclosingPosition, "Annotation is only supported on case class")
+      } recover {
+        case _ ⇒
+          val q"final case class $className(..$fields) extends ..$bases { ..$body }" = classDecl
+          (className, fields)
+      }
+
+      classNameAndFieldsTry match {
+        case Success(classNameAndFields) ⇒ classNameAndFields
+        case _                           ⇒ c.abort(c.enclosingPosition, "Annotation is only supported on case class")
       }
     }
 
     def jsonFormatter(className: TypeName, fields: List[ValDef]) = {
       val fieldsLength = fields.length
       fieldsLength match {
-        case 0 => c.abort(c.enclosingPosition, "Cannot create json formatter for case class with no fields")
-        case 1 if !isStrict => {
+        case 0 ⇒ c.abort(c.enclosingPosition, "Cannot create json formatter for case class with no fields")
+        case 1 if !isStrict ⇒ {
           // use the serializer for the field
           q"""
             implicit val jsonAnnotationFormat = new RootJsonFormat[$className] {
@@ -70,7 +79,7 @@ class jsonMacro(isStrict: Boolean) {
             }
           """
         }
-        case _ => {
+        case _ ⇒ {
           // use Spray's macro
           val applyMethod = q"${className.toTermName}.apply"
           val jsonFormatMethodName = getTermNameFromString(s"jsonFormat$fieldsLength", c)
@@ -81,7 +90,7 @@ class jsonMacro(isStrict: Boolean) {
     }
 
     def modifiedCompanion(compDeclOpt: Option[ModuleDef], format: ValDef, className: TypeName) = {
-      compDeclOpt map { compDecl =>
+      compDeclOpt map { compDecl ⇒
         // Add the formatter to the existing companion object
         val q"object $obj extends ..$bases { ..$body }" = compDecl
         q"""
@@ -109,9 +118,9 @@ class jsonMacro(isStrict: Boolean) {
     }
 
     annottees.map(_.tree) match {
-      case (classDecl: ClassDef) :: Nil => modifiedDeclaration(classDecl)
-      case (classDecl: ClassDef) :: (compDecl: ModuleDef) :: Nil => modifiedDeclaration(classDecl, Some(compDecl))
-      case _ => c.abort(c.enclosingPosition, "Invalid annottee")
+      case (classDecl: ClassDef) :: Nil ⇒ modifiedDeclaration(classDecl)
+      case (classDecl: ClassDef) :: (compDecl: ModuleDef) :: Nil ⇒ modifiedDeclaration(classDecl, Some(compDecl))
+      case _ ⇒ c.abort(c.enclosingPosition, "Invalid annottee")
     }
   }
 }

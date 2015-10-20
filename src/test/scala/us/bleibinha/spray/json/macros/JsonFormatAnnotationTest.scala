@@ -6,6 +6,8 @@ import DefaultJsonProtocol._
 
 @json case class City(name: String)
 @json case class Person(name: String, age: Int)
+@json final case class Car(make: String)
+//@json class Factory(address: String) // for testing the error
 
 @jsonstrict case class City2(name: String)
 @jsonstrict case class Person2(name: String, age: Int)
@@ -31,6 +33,14 @@ class JsonFormatAnnotationTest extends Specification {
         "age" -> JsNumber(46)
       )
       Option(json.convertTo[Person]) must beSome(person)
+    }
+
+    "create a formatter for a final case class" in {
+
+      val car = Car("Tesla")
+      val json = car.toJson
+      json === JsString("Tesla")
+      Option(json.convertTo[Car]) must beSome(car)
     }
   }
 
