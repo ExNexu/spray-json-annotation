@@ -2,7 +2,7 @@ name := "spray-json-annotation"
 
 organization := "us.bleibinha"
 
-version := "0.5"
+version := "0.6-SNAPSHOT"
 
 scalaVersion := "2.11.7"
 
@@ -19,7 +19,7 @@ libraryDependencies ++= (
 
 libraryDependencies ++= Seq(
   "io.spray" %% "spray-json" % "1.3.2" % Test,
-  "org.specs2" %% "specs2-core" % "3.6.4" % Test
+  "org.specs2" %% "specs2-core" % "3.6.5" % Test
 )
 
 unmanagedSourceDirectories in Compile <+= (sourceDirectory in Compile, scalaBinaryVersion){
