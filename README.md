@@ -13,7 +13,7 @@ Add this to your `build.sbt` (for Scala 2.10 & 2.11):
 resolvers += "bleibinha.us/archiva releases" at "http://bleibinha.us/archiva/repository/releases"
 
 libraryDependencies ++= Seq(
-  "us.bleibinha" %% "spray-json-annotation" % "0.5"
+  "us.bleibinha" %% "spray-json-annotation" % "0.6"
 )
 
 addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0-M5" cross CrossVersion.full)
@@ -44,6 +44,9 @@ object User {
 `@json` can be used if the case class has only one field and you don't want to generate a full-blown json object. For more usage examples see the test implementation: [JsonFormatAnnotationTest.scala](https://github.com/ExNexu/spray-json-annotation/blob/master/src/test/scala/us/bleibinha/macros/JsonFormatAnnotationTest.scala)
 
 ## Version history
+
+### 0.6
+* Add support for `final case class`
 
 ### 0.5
 * Update dependency and plugin versions
