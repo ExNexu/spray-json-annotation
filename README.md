@@ -41,7 +41,7 @@ object User {
 }
 ```
 
-`@json` can be used if the case class has only one field and you don't want to generate a full-blown json object. For more usage examples see the test implementation: [JsonFormatAnnotationTest.scala](https://github.com/ExNexu/spray-json-annotation/blob/master/src/test/scala/us/bleibinha/macros/JsonFormatAnnotationTest.scala)
+`@json` can be used if the case class has only one field and you don't want to generate a full-blown json object. For more usage examples see the test implementation: [JsonFormatAnnotationTest.scala](https://github.com/ExNexu/spray-json-annotation/blob/master/src/test/scala/us/bleibinha/spray/json/macros/JsonFormatAnnotationTest.scala)
 
 ## Version history
 
